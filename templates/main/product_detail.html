@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="product" style="background: url('{% static 'main/img/content-bg3.jpg' %}')no-repeat;
+    background-position: center;
+    background-size: cover;">
+        <div class="section-left">
+            <div class="image"><div><img src="{{ product.image.url }}"></div></div>
+            <div class="detail-text"><b>Артикул: </b> {{ product.id }}</div>
+            <div class="detail-text"><b>Цена: </b> {{ product.price }} руб.</div>
+            <div class="detail-text"><b>В наличии: </b>{{ product.stock }} шт.</div>
+        </div>
+        <div class="section-right">
+            <div class="detail-text"><h2><b>{{ product.name }}</b></h2></div>
+            <div class="detail-text">{{ product.description|linebreaks }}</div>
+            <div class="detail-text">
+                <a href="" class="btn btn-danger">В избранное</a>
+                <a href="" class="btn btn-dark">В корзину</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

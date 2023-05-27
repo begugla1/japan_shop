@@ -1,0 +1,17 @@
+{% load static %}
+{% load home_tags %}
+
+<div class="card" style="background: url('{% static 'main/img/card-bg.jpg' %}')no-repeat;
+background-position: center;
+background-size: cover;">
+    <div class="image"><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}"></a></div>
+    <div class="info"><b>{{ product.name|cut:25 }}</b></div>
+    <div class="info">{{ product.description|linebreaks|cut:55 }}</div>
+    <div class="info"><b>Цена: </b> {{ product.price }} руб.</div>
+    <div class="info"><b>В наличии: </b>{{ product.stock }} шт.</div>
+    <div class="info">
+        <a href="" class="btn btn-outline-danger" style="margin: 0 35px 0 18px">В избранное</a>
+        <a href="" class="btn btn-outline-dark">В корзину</a>
+    </div>
+</div>
+

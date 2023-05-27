@@ -1,0 +1,27 @@
+{% load static %}
+{% load home_tags %}
+
+<div class="content" style="background: url('{% static 'main/img/content-bg3.jpg' %}')no-repeat;
+    background-position: center;
+    background-size: cover;">
+
+    <div class="ft">
+        {% if not products %}
+            <h1>Здесь пока что ничего нет :(</h1>
+        {% else %}
+            {% if not cat_name %}
+                <h1>Все товары</h1>
+            {% else %}
+                <h1>Категория: {{ cat_name }}</h1>
+            {% endif %}
+        {% endif %}
+
+        {% show_pag page_obj paginator %}
+
+    </div>
+
+    {% for product in products %}
+        {% show_card product %}
+    {% endfor %}
+
+</div>

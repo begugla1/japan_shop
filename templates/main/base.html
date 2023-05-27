@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;1,100&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f3069c173d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="main" style="background: url('{% static 'main/img/content-bg3.jpg' %}')no-repeat;
+        background-position: center;
+        background-size: cover;">
+        <div class="up-panel" style="background: url('{% static 'main/img/panel.jpg' %}')no-repeat;
+        background-position: center;
+        background-size: cover;">
+            <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}"></a></div>
+            <div class="logo-tip"><h1>Ёки-моки</h1><h6>Магазин восточных товаров</h6></div>
+            <div class="links"><a href="{% url 'home' %}"><i class="fa-solid fa-store"></i> Каталог</a></div>
+            <div class="links"><a href=""><i class="fa-solid fa-cart-shopping"></i> Корзина</a></div>
+            <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <div class="links"><a href="/admin"><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a></div>
+                {% else %}
+                    <div class="links"><a href=""><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a></div>
+                {% endif %}
+            {% else %}
+                <div class="links"><a href=""><i class="fa-solid fa-right-to-bracket"></i> Вход</a> | <a href="">
+                    <i class="fa-solid fa-address-card"></i> Регистрация</a></div>
+            {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+        <footer>
+            <div class="footer" style="background: url('{% static 'main/img/footer.jpg' %}')no-repeat;
+        background-position: center;
+        background-size: cover;">
+                <div class="author">
+                    Все права защищены
+                </div>
+                <div class="author">
+                    Подделка преследуется законом
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

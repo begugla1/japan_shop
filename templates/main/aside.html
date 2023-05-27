@@ -1,0 +1,23 @@
+{% load static %}
+
+<aside style="background: url('{% static 'main/img/content-bg3.jpg' %}')no-repeat;
+    background-position: center;
+    background-size: cover;">
+    <div class="big">
+        <b>Категории</b>
+    </div>
+    {% if not cat_name %}
+        <div class="small"><a href="{% url 'home' %}" class="disabled"><b>Все</b></a></div>
+    {% else %}
+        <div class="small"><a href="{% url 'home' %}">Все</a></div>
+    {% endif %}
+    {% for cat in cats %}
+        {% if cat.product_quantity > 0 %}
+            {% if cat == cat_name %}
+                <div class="small"><a href="{{ cat.get_absolute_url }}" class="disabled"><b>{{ cat }}</b></a></div>
+            {% else %}
+                <div class="small"><a href="{{ cat.get_absolute_url }}">{{ cat }}</a></div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</aside>
