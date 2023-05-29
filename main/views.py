@@ -14,7 +14,9 @@ class Home(HomeMixin, ListView):
         context = super().get_context_data(**kwargs)
         extra_context = self.get_user_data(title='Каталог',
                                            cat_name=None)
-        return context | extra_context
+        context.update(extra_context)
+
+        return context
 
 
 class HomeCat(HomeMixin, ListView):
@@ -27,7 +29,8 @@ class HomeCat(HomeMixin, ListView):
         el = Category.objects.get(slug=self.kwargs['cat_slug'])
         extra_context = self.get_user_data(title=f'Товары категории: {el}',
                                            cat_name=el)
-        return context | extra_context
+        context.update(extra_context)
+        return context
 
 
 class HomeCatProduct(DetailView):
