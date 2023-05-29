@@ -8,7 +8,8 @@
     background-position: center;
     background-size: cover;">
         <div class="section-left">
-            <div class="image"><div><img src="{{ product.image.url }}"></div></div>
+            <div class="image"><div><img src="{% if product.image %}
+            {{ product.image.url }}{% else %}{% static 'main/img/no-image.jpg' %}{% endif %}"></div></div>
             <div class="detail-text"><b>Артикул: </b> {{ product.id }}</div>
             <div class="detail-text"><b>Цена: </b> {{ product.price }} руб.</div>
             <div class="detail-text"><b>В наличии: </b>{{ product.stock }} шт.</div>
@@ -18,7 +19,7 @@
             <div class="detail-text">{{ product.description|linebreaks }}</div>
             <div class="detail-text">
                 <a href="" class="btn btn-danger">В избранное</a>
-                <a href="" class="btn btn-dark">В корзину</a>
+                <a href="{% url 'cart_add' product.id %}" class="btn btn-dark">В корзину</a>
             </div>
         </div>
     </div>

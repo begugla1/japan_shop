@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+    <div class="cart">
+        {% if cart.get_total_quantity == 0 %}
+            <h2>В корзине ничего нет:(</h2>
+        {% else %}
+            {% for product in cart %}
+                {% with db_product=product.product_model %}
+                <h5><b>Товар:</b> {{ db_product }}</h5>
+                <h5><b>Цена</b>: {{ db_product.price }} руб.</h5>
+                <h5><b>Количество</b>{{ product.quantity }}</h5>
+                <h5><b>Общая цена</b> {{ product.total_product_sum }}</h5>
+                <h5><a href="{% url 'cart_delete' db_product.id %}" class="btn btn-warning">Удалить из корзины</a></h5>
+                {% endwith %}
+            {% endfor %}
+            <h2>Общее количество товаров:  {{ cart.get_total_quantity }}</h2>
+            <h2>Итого: {{ cart.get_total_sum }}</h2>
+        {% endif %}
+    </div>
+{% endblock %}

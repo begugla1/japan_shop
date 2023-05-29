@@ -9,7 +9,7 @@ class Product(models.Model):
     slug = models.SlugField('URL продукта', unique=True, db_index=True)
     image = models.ImageField('Изображение', upload_to='media/products/%Y/%m/%d', blank=True)
     description = models.TextField('Описание', blank=True)
-    price = models.DecimalField('Цена', max_digits=10, decimal_places=1)
+    price = models.PositiveIntegerField('Цена')
     available = models.BooleanField('В наличии', default=True)
     stock = models.PositiveIntegerField('Количество товара')
     create_time = models.DateTimeField('Время создания', auto_now_add=True)
@@ -29,7 +29,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-        ordering = ['create_time', 'name']
+        ordering = ['-create_time', 'name']
         index_together = (('id', 'slug'),)
 
 

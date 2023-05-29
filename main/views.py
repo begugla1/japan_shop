@@ -1,9 +1,8 @@
-from django.db.models import Count
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from .models import *
 from .utils import HomeMixin
+from cart.forms import CartAddProductForm
 
 
 class Home(HomeMixin, ListView):
@@ -36,3 +35,8 @@ class HomeCatProduct(DetailView):
     template_name = 'main/product_detail.html'
     slug_url_kwarg = 'product_slug'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_product_form'] = CartAddProductForm()
+        return context

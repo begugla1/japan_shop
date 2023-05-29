@@ -20,7 +20,7 @@
             <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}"></a></div>
             <div class="logo-tip"><h1>Ёки-моки</h1><h6>Магазин восточных товаров</h6></div>
             <div class="links"><a href="{% url 'home' %}"><i class="fa-solid fa-store"></i> Каталог</a></div>
-            <div class="links"><a href=""><i class="fa-solid fa-cart-shopping"></i> Корзина</a></div>
+            <div class="links"><a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i> Корзина</a></div>
             <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}

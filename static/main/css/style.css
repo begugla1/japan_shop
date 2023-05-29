@@ -82,7 +82,7 @@ aside div.small a {
 }
 
 .content {
-    min-height: 80vh;
+    min-height: 78vh;
     max-height: 200vh;
     background-color: white;
     border-up: 3px solid #ff2400;
@@ -226,4 +226,8 @@ footer .footer .author {
     transform: scale(1.15);
 }
 
-
+.cart {
+    min-height: 78vh;
+    width: 100%;
+    padding-left: 10vw;
+}
