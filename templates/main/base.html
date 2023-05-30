@@ -31,12 +31,14 @@
             <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                    <div class="links"><a href="/admin"><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a></div>
+                    <div class="links"><a href="/admin"><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a> |
+                    <a href="{% url 'logout' %}">Выйти</a></div>
                 {% else %}
-                    <div class="links"><a href=""><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a></div>
+                    <div class="links"><a href=""><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a> |
+                    <a href="{% url 'logout' %}">Выйти</a></div>
                 {% endif %}
             {% else %}
-                <div class="links"><a href=""><i class="fa-solid fa-right-to-bracket"></i> Вход</a> | <a href="">
+                <div class="links"><a href=""><i class="fa-solid fa-right-to-bracket"></i> Вход</a> | <a href="{% url 'register' %}">
                     <i class="fa-solid fa-address-card"></i> Регистрация</a></div>
             {% endif %}
         </div>

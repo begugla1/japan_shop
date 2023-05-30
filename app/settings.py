@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_bootstrap5',
     'cart',
     'main',
     'debug_toolbar',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.sites',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,6 @@ CART_SESSION_ID = 'cart'
 SITE_ID = 1
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

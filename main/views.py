@@ -1,8 +1,12 @@
-from django.views.generic import ListView, DetailView
+from django.contrib.auth import login
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import *
 from .utils import HomeMixin
-from cart.forms import CartAddProductForm
+from .forms import *
 
 
 class Home(HomeMixin, ListView):
@@ -26,7 +30,7 @@ class HomeCat(HomeMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        el = Category.objects.get(slug=self.kwargs['cat_slug'])
+        el = get_object_or_404(Category, slug=self.kwargs['cat_slug'])
         extra_context = self.get_user_data(title=f'Товары категории: {el}',
                                            cat_name=el)
         context.update(extra_context)
@@ -42,3 +46,26 @@ class HomeCatProduct(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class HomeLogin(LoginView):
+    form_class = CustomLoginForm
+    template_name = 'main/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class HomeRegister(CreateView):
+    form_class = CustomRegisterForm
+    template_name = 'main/register.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
+
+
+class HomeLogout(LogoutView):
+    next_page = 'login'
