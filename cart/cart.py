@@ -13,18 +13,20 @@ class Cart(object):
         request.session[settings.CART_SESSION_ID] = self.cart
         request.session.modified = True
 
-    def add(self, request, product_id, product_quantity=1):
+    def add(self, request, product_id, product_quantity=0, product_update=False):
         product = self.cart.get(str(product_id))
         db_product = Product.objects.get(id=product_id)
 
         if not product:
             self.cart[str(product_id)] = {
-                                          'quantity': 0 + product_quantity,
-                                          'price': db_product.price
+                                          'quantity': product_quantity,
+                                          'price': db_product.price,
                                           }
 
+        if product_update:
+            self.cart[str(product_id)]['quantity'] = product_quantity
         else:
-            self.cart[str(product_id)]['quantity'] += product_quantity
+            self.cart[str(product_id)]['quantity'] += 1
 
         self.save(request)
 
@@ -33,6 +35,10 @@ class Cart(object):
         if product:
             del self.cart[str(product_id)]
             self.save(request)
+
+    def clear(self, request):
+        self.cart.clear()
+        self.save(request)
 
     def __iter__(self):
         products_ids = self.cart.keys()
@@ -50,4 +56,7 @@ class Cart(object):
 
     def get_total_sum(self):
         return sum((product['quantity'] * product['price'] for product in self.cart.values()))
+
+    def get_ids(self):
+        return list(key for key in self.cart.keys())
 

@@ -7,7 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="icon" href="{% static 'main/img/sakura-20.png' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
@@ -19,10 +19,15 @@
         <div class="up-panel" style="background: url('{% static 'main/img/panel.jpg' %}')no-repeat;
         background-position: center;
         background-size: cover;">
-            <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}"></a></div>
+            <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'main/img/sakura-20.png' %}"></a></div>
             <div class="logo-tip"><h1>Ёки-моки</h1><h6>Магазин восточных товаров</h6></div>
-            <div class="links"><a href="{% url 'home' %}"><i class="fa-solid fa-store"></i> Каталог</a></div>
-            <div class="links"><a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i> Корзина</a></div>
+            {% if cart.get_total_sum > 0 %}
+                <div class="links"><a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i>
+                    Корзина: {{ cart.get_total_sum }} руб. <i class="fa-solid fa-face-grin-wide"></i></a></div>
+            {% else %}
+                <div class="links"><a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i>
+                    Корзина:  <i class="fa-solid fa-face-frown"></i></a></div>
+            {% endif %}
             <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}

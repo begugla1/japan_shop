@@ -68,6 +68,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "cart.context_processors.cart",
             ],
         },
     },
@@ -143,3 +144,5 @@ INTERNAL_IPS = [
 CART_SESSION_ID = 'cart'
 
 SITE_ID = 1
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

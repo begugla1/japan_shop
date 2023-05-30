@@ -1,24 +1,63 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load home_tags %}
 
 {% block title %}Корзина{% endblock %}
 
 {% block content %}
     <div class="cart">
         {% if cart.get_total_quantity == 0 %}
-            <h2>В корзине ничего нет:(</h2>
+            <h2 style="text-align: center; padding-top: 22vh;">В корзине ничего нет:(</h2>
         {% else %}
-            {% for product in cart %}
-                {% with db_product=product.product_model %}
-                <h5><b>Товар:</b> {{ db_product }}</h5>
-                <h5><b>Цена</b>: {{ db_product.price }} руб.</h5>
-                <h5><b>Количество</b>{{ product.quantity }}</h5>
-                <h5><b>Общая цена</b> {{ product.total_product_sum }}</h5>
-                <h5><a href="{% url 'cart_delete' db_product.id %}" class="btn btn-warning">Удалить из корзины</a></h5>
-                {% endwith %}
-            {% endfor %}
-            <h2>Общее количество товаров:  {{ cart.get_total_quantity }}</h2>
-            <h2>Итого: {{ cart.get_total_sum }}</h2>
+            <div class="cart-delete">
+                <a href="{% url 'clear' %}" class="btn btn-outline-dark" style="font-size: 1.15em;">Очистить корзину</a>
+            </div>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Общая стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in cart %}
+                        {% with db_product=product.product_model %}
+                            <tr style="background: url('{% static 'main/img/card-bg.jpg' %}');
+                            background-position: center;
+                            background-size: cover;">
+                                <td>{{ db_product.name|cut:15 }}</td>
+                                <td><a href="{% url 'show_product' db_product.cat.slug db_product.slug %}">
+                                        <img src="{% if db_product.image %}{{ db_product.image.url }}
+                                        {% else %}{% static 'main/img/no-image.jpg' %}{% endif %}"
+                                        alt=""></a></td>
+                                <td>{{ product.price }} руб.</td>
+                                <td>{{ product.quantity }} шт.
+                                    <form action="{% url 'cart_add' db_product.id %}" method="post">
+                                        {% csrf_token %}
+                                        {{ form.as_div }}
+                                        <button type="submit" class="btn btn-link btn-sm">Обновить</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    {{ product.total_product_sum }} руб. <a href="{% url 'cart_delete' db_product.id %}"><i class="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="finish">
+                <div class="word">Кол-во товаров: {{ cart.get_total_quantity }}</div>
+                <div class="word">Итого: {{ cart.get_total_sum }} руб.</div>
+            </div>
+            <div class="finish">
+                <div class="finish-buttons">
+                    <a href="{% url 'home' %}" class="btn btn-outline-danger" style="font-size: 1.15em;">Продолжить покупки</a>
+                    <a href="" class="btn btn-outline-success" style="font-size: 1.15em;" >Оплатить заказ</a>
+                </div>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

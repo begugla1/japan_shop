@@ -23,7 +23,7 @@
 .up-panel .links a{
     text-decoration: none;
     color: #ff2400;
-    font-size: 1.4em;
+    font-size: 1.27em;
 }
 
 .up-panel .links a:hover, .up-panel .links:hover{
@@ -36,7 +36,7 @@
 }
 
 .up-panel .logo img{
-    height: 100px;
+    height: 70px;
 }
 
 .up-panel .logo-tip{
@@ -128,24 +128,22 @@ footer .footer .author {
 .card {
     color: black;
     width: 28%;
-    height: 53vh;
-    margin: 20px 20px 20px 37px;
+    height: 51vh;
+    margin: 20px 20px 30px 37px;
     border: 0;
     box-shadow: 2px 2px 2px 2px rgba(220, 20, 60, .2);
     border-left: 2px solid rgba(220, 20, 60, .2);
     border-top: 2px solid rgba(220, 20, 60, .2);
-    background: url('main/img/card-bg.jpg')no-repeat;
-    background-position: center;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .card div {
-    padding-left: 20px;
-    padding-right: 12px;
+    padding-left: 7px;
+    padding-right: 7px;
 }
+
 .card p {
     margin: 0;
 }
@@ -164,8 +162,8 @@ footer .footer .author {
 }
 
 .card .info{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 1.11em;
     width: 100%
 }
@@ -229,5 +227,74 @@ footer .footer .author {
 .cart {
     min-height: 78vh;
     width: 100%;
-    padding-left: 10vw;
+}
+
+.cart table {
+    margin: 4vh 15vw 0 15vw;
+    border-radius: 30px;
+}
+
+.cart tr {
+    width: 70vw;
+}
+
+.cart tr th {
+    height: 7vh;
+    width: calc(100% / 5);
+    text-align: center;
+    font-size: 1.7em;
+    color: white;
+    font-weight: 550;
+    background-color: #ff0000;
+}
+
+.cart tr td {
+    height: 11vh;
+    width: calc(100% / 5);
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 800;
+    border: 2px solid silver;;
+}
+
+.cart tr td img {
+    height: 8vh;
+    border: 3px solid #151719;
+    border-radius: 5px;
+    transition: transform .35s ease;
+}
+
+.cart tr td img:hover {
+    transform: scale(1.17)
+}
+
+.cart tr td .btn {
+    color: #ff2400;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.cart tr td .btn:hover {
+    text-decoration: underline solid #ff2400;
+}
+
+.finish {
+    margin: 3vh 15vw 3vh 15vw;
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.word {
+    font-weight: 800;
+    font-size: 2em;
+}
+
+.finish-buttons a {
+    margin-right: 50px;
+}
+
+.cart-delete {
+    margin: 3vh 0 0 0;
+    text-align: center;
 }
