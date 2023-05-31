@@ -127,9 +127,9 @@ footer .footer .author {
 
 .card {
     color: black;
-    width: 28%;
-    height: 49vh;
-    margin: 20px 20px 30px 37px;
+    width: 29%;
+    height: 47.5vh;
+    margin: 20px 20px 30px 27px;
     border: 0;
     box-shadow: 2px 2px 2px 2px rgba(220, 20, 60, .2);
     border-left: 2px solid rgba(220, 20, 60, .2);
@@ -140,7 +140,7 @@ footer .footer .author {
 }
 
 .card div {
-    padding-left: 7px;
+    padding-left: 10px;
     padding-right: 7px;
 }
 
@@ -317,4 +317,42 @@ footer .footer .author {
 
 .field {
     margin: 25px 0 25px 0;
+}
+
+.profile {
+    width: 50%;
+    height: 78vh;
+    display: flex;
+    margin-left: 25%;
+    border-left: 2px solid #ff2400;
+    border-right: 2px solid #ff2400;
+    background-color: white;
+    font-size: 1.6em;
+}
+
+.profile img {
+    height: 140px;
+    border: 2px solid #222222;
+    border-radius: 10px;
+}
+
+.profile .info {
+    width: 100%;
+    margin: 20px 0 20px 30px;
+}
+.profile a{
+    text-decoration: none;
+    color: #ff2400;
+    font-weight: 800;
+}
+
+.profile a:hover {
+    text-decoration: underline solid #ff2400;
+}
+
+.up-img {
+    height: 33px;
+    margin: 0 7px 0 5px;
+    border: 1px solid #222222;
+    border-radius: 3px;
 }

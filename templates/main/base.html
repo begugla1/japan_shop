@@ -31,11 +31,17 @@
             <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                    <div class="links"><a href="/admin"><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a> |
-                    <a href="{% url 'logout' %}"> <i class="fa-solid fa-outdent"></i> Выйти</a></div>
+                    <div class="links"><a href="/admin">
+                        <div class="info"><img src="{% if user.profile.profile_photo %}
+                        {{ user.profile.profile_photo.url }}{% else %}
+                        {% static 'main/img/default.jpg' %}{% endif %}" alt=""></div>{{ user.username }}</a></div>
+                    <div class="links"><a href="{% url 'logout' %}"> <i class="fa-solid fa-outdent"></i> Выйти</a></div>
                 {% else %}
-                    <div class="links"><a href=""><i class="fa-solid fa-user-ninja"></i> Личный кабинет</a> |
-                    <a href="{% url 'logout' %}"> <i class="fa-solid fa-outdent"></i> Выйти</a></div>
+                    <div class="links"><a href="{% url 'profile' %}">
+                        <img src="{% if user.profile.profile_photo %}
+                        {{ user.profile.profile_photo.url }}{% else %}
+                        {% static 'main/img/default.jpg' %}{% endif %}" alt="" class="up-img">{{ user.username }}</a></div>
+                    <div class="links"><a href="{% url 'logout' %}"> <i class="fa-solid fa-outdent"></i> Выйти</a></div>
                 {% endif %}
             {% else %}
                 <div class="links"><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Вход</a> | <a href="{% url 'register' %}">

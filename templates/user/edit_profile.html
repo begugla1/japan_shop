@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Изменение профиля{% endblock %}
+
+{% block content %}
+ <div class="form-view">
+    <div class="input" style="text-align: center;">
+        <h3 style="padding: 0 0 10px 0px;">Изменение профиля</h3>
+        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            <button type="submit" class="btn btn-outline-danger" style="margin: 10px 0 0 0px;">Изменить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

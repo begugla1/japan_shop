@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Профиль {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="profile">
+    <div class="profile-content">
+        <div class="info"><img src="{% if user.profile.profile_photo %}
+        {{ user.profile.profile_photo.url }}{% else %}
+        {% static 'main/img/default.jpg' %}{% endif %}" alt=""></div>
+        <div class="info" style="font-size: 1.5em;"><b>{{ user.username }}</b></div>
+        <div class="info"><b>Имя:</b> {% if user.first_name %}{{ user.first_name }}{% else %}Не указано{% endif %}</div>
+        <div class="info"><b>Фамилия:</b> {% if user.last_name %}{{ user.last_name }}{% else %}Не указано{% endif %}</div>
+        <div class="info"><b>Email:</b> {% if user.email %}{{ user.email }}{% else %}Не указано{% endif %}</div>
+        <div class="info"><b>Номер телефона:</b> {% if user.profile.phone_number %}{{ user.profile.phone_number }}
+            {% else %}Не указано{% endif %}</div>
+        <div class="info">Изменить данные можно <a href="{% url 'edit_profile' %}">здесь</a></div>
+    </div>
+</div>
+{% endblock %}

@@ -6,15 +6,15 @@ from transliterate import translit
 
 class Product(models.Model):
     name = models.CharField('Название', max_length=150, db_index=True)
-    slug = models.SlugField('URL продукта', unique=True, db_index=True)
+    slug = models.SlugField('URL', unique=True, db_index=True)
     image = models.ImageField('Изображение', upload_to='media/products/%Y/%m/%d', blank=True)
     description = models.TextField('Описание', blank=True)
     price = models.PositiveIntegerField('Цена')
     available = models.BooleanField('В наличии', default=True)
-    stock = models.PositiveIntegerField('Количество товара')
+    stock = models.PositiveIntegerField('Кол-во')
     create_time = models.DateTimeField('Время создания', auto_now_add=True)
     update_time = models.DateTimeField('Время обновления', auto_now=True)
-    cat = models.ForeignKey('Category', db_index=True, on_delete=models.PROTECT, verbose_name='Категория')
+    cat = models.ForeignKey('Category', db_index=True, on_delete=models.CASCADE, verbose_name='Категория')
 
     def __str__(self):
         return self.name

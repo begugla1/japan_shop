@@ -4,7 +4,7 @@ from .models import Category, Product
 
 
 class HomeMixin:
-    paginate_by = 6
+    paginate_by = 9
     model = Product
     template_name = 'main/home.html'
     context_object_name = 'products'
