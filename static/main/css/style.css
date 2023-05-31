@@ -300,7 +300,7 @@ footer .footer .author {
 }
 
 .form-view {
-    height: 90vh;
+    min-height: 78vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -308,9 +308,13 @@ footer .footer .author {
 }
 
 .form-view .input .login{
-    width: 350px;
+    width: 313px;
 }
 
 .form-view .input .register {
-    width: 551px;
+    width: 365px;
+}
+
+.field {
+    margin: 25px 0 25px 0;
 }

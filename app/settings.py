@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'cart',
     'main',
+    'user',
     'debug_toolbar',
     "django.contrib.admin",
     "django.contrib.auth",
