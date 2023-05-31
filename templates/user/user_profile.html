@@ -16,6 +16,7 @@
         <div class="info"><b>Номер телефона:</b> {% if user.profile.phone_number %}{{ user.profile.phone_number }}
             {% else %}Не указано{% endif %}</div>
         <div class="info">Изменить данные можно <a href="{% url 'edit_profile' %}">здесь</a></div>
+        <div class="info"><a href="{% url 'logout' %}"><b>Выйти</b></a></div>
     </div>
 </div>
 {% endblock %}
