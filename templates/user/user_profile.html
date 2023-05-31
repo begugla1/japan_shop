@@ -5,7 +5,9 @@
 
 {% block content %}
 <div class="profile">
-    <div class="profile-content">
+    <div class="profile-content" style="background: url('{% static 'main/img/card-bg.jpg' %}')no-repeat;
+        background-position: center;
+        background-size: cover;">
         <div class="info"><img src="{% if user.profile.profile_photo %}
         {{ user.profile.profile_photo.url }}{% else %}
         {% static 'main/img/default.jpg' %}{% endif %}" alt=""></div>
