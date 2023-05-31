@@ -6,7 +6,7 @@
 
         {% for p in paginator.page_range %}
             {% if page_obj.number == p %}
-                <a href=""><button class="btn btn-danger" disabled>{{ p }}</button></a>
+                <a href="" class="disabled"><button class="btn btn-danger" disabled style="pointer-events: none; cursor: default;">{{ p }}</button></a>
             {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
                 <a href="?page={{ p }}" class="btn btn-outline-danger">{{ p }}</a>
             {% endif %}
