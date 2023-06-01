@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'main',
     'user',
     'debug_toolbar',
+    'order',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -148,7 +149,12 @@ CART_SESSION_ID = 'cart'
 
 SITE_ID = 1
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Session
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 2419200
+SESSION_COOKIE_SECURE = True

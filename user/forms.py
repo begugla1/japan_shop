@@ -41,6 +41,7 @@ class UserUpdateForm(ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].label = ''
+
         self.fields['first_name'].widget.attrs['placeholder'] = 'Имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Фамилия'
         self.fields['email'].widget.attrs['placeholder'] = 'Email'

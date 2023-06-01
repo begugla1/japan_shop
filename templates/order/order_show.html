@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Мои заказы{% endblock %}
+
+{% block content %}
+    {% for order in orders %}
+        <h2>{{ order }}</h2>
+    {% endfor %}
+{% endblock %}

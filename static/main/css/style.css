@@ -23,7 +23,7 @@
 .up-panel .links a{
     text-decoration: none;
     color: #ff2400;
-    font-size: 1.27em;
+    font-size: 1.33em;
 }
 
 .up-panel .links a:hover, .up-panel .links:hover{
@@ -299,7 +299,7 @@ footer .footer .author {
     text-align: center;
 }
 
-.form-view {
+.form-view, .success {
     min-height: 78vh;
     width: 100%;
     display: flex;
@@ -336,13 +336,14 @@ footer .footer .author {
 
 .profile img {
     height: 140px;
-    border: 2px solid #222222;
+    width: 140px;
+    border: 3px solid #ff2400;
     border-radius: 10px;
 }
 
 .profile .info {
     width: 100%;
-    margin: 23px 0 23px 30px;
+    margin: 18px 0 18px 44px;
 }
 .profile a{
     text-decoration: none;
@@ -356,7 +357,32 @@ footer .footer .author {
 
 .up-img {
     height: 33px;
+    width: 33px;
     margin: 0 7px 0 5px;
-    border: 1px solid #222222;
+    border: 2px solid #ff2400;
     border-radius: 3px;
 }
+
+.success div {
+    width: 500px;
+    height: 300px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    border: 3px solid #ff2400;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+.success div a{
+    text-decoration: none;
+    color: #ff2400;
+}
+
+.success div a:hover {
+    text-decoration: underline solid #ff2400;
+}
+
