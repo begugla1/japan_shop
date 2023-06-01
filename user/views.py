@@ -1,6 +1,5 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy

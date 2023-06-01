@@ -348,7 +348,7 @@ footer .footer .author {
 
 .profile .info {
     width: 100%;
-    margin: 18px 0 18px 44px;
+    margin: 13px 0 13px 44px;
 }
 .profile a{
     text-decoration: none;
@@ -404,4 +404,41 @@ footer .footer .author {
 .order-preview li {
     list-style-type: none;
     margin: 10px 20px 10px 0;
+}
+
+.orders-show {
+    text-align: center;
+    min-height: 78vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.orders-show h2 {
+    padding: 20px 0 0 0;
+}
+
+.orders-show div.order-paid, .orders-show div.order-not-paid {
+    margin: 20px 0 30px 0;
+    backdrop-filter: blur(15px);
+    border: 3px solid silver;
+    border-radius: 20px;
+    width: 620px;
+}
+
+.orders-show h4 {
+    margin: 13px 0 13px 0;
+}
+
+.orders-show a {
+    margin-left: 60px;
+}
+
+.orders-show .pag a{
+    margin: 0 5px 0 5px;
+}
+
+.order-paid {
+    color: black;
 }

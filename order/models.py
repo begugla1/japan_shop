@@ -29,6 +29,9 @@ class Order(models.Model):
     def get_total_sum(self):
         return sum(item.total_cost for item in self.orderitem_set.all())
 
+    def get_total_quantity(self):
+        return sum(item.quantity for item in self.orderitem_set.all())
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, db_index=True, verbose_name='Заказ')

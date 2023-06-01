@@ -41,9 +41,23 @@ class OrderSuccess(TemplateView):
 
 class OrderShow(ListView):
     model = Order
-    paginate_by = 3
     template_name = 'order/order_show.html'
     context_object_name = 'orders'
+    paginate_by = 3
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
+
+def order_pay(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order.paid = True
+    order.save()
+    context = {'order': order}
+    return render(request, 'order/order_success_payment.html', context)
+
+
+def order_delete(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order.delete()
+    return redirect('order_show')

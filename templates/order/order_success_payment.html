@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Оформление заказа успешно{% endblock %}
+
+{% block content %}
+    <div class="success">
+        <div class="words">
+            <div>
+                <p>Транзакция заказа номер <b>{{ order.id }}</b> прошла успешно!</p>
+                <p>Спасибо за покупку!</p>
+                <p>Ожидайте заказ в ближайшее время.</p>
+                <p><a href="{% url 'order_show' %}"><b>Ваши заказы</b></a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -32,12 +32,12 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_bootstrap5',
     'cart',
     'main',
     'user',
-    'debug_toolbar',
     'order',
+    'debug_toolbar',
+    'crispy_bootstrap5',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

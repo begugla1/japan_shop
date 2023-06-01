@@ -48,6 +48,7 @@ def cut(value: str, quantity: int):
     value = value.replace('<p>', '').replace('</p>', '')
     return value[:quantity] + '...' if len(value[:quantity]) != len(value) else value
 
+
 @register.filter
 def to_str(value):
     return str(value)
