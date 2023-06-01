@@ -19,5 +19,16 @@
             <h3><button type="submit" class="btn btn-outline-danger" style="margin: 10px 0 30px 20px; text-align: center;">Оформить</button></h3>
         </form>
     </div>
+    <div class="order-preview">
+        <h3>Заказ</h3>
+        <ul>
+            {% for item in cart %}
+            <li><a href="{% url 'show_product' item.product_model.cat.slug item.product_model.slug %}">
+                <b>{{ item.product_model.name }}:</b></a> {{ item.price }} руб.
+                {{ item.quantity }} шт. >>> {{ item.total_product_sum }} руб.</li>
+            {% endfor %}
+        </ul>
+        <h3><b>Итого</b>: {{ cart.get_total_quantity }} товаров >>> {{ cart.get_total_sum }} руб.</h3>
+    </div>
 </div>
 {% endblock %}

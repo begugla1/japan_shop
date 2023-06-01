@@ -315,6 +315,11 @@ footer .footer .author {
     width: 365px;
 }
 
+.form-view label {
+    font-weight: 540;
+    font-size: 1.33em;
+}
+
 .field {
     margin: 25px 0 25px 0;
 }
@@ -377,12 +382,26 @@ footer .footer .author {
     font-size: 1.3em;
 }
 
-.success div a{
+.success div a, .order-preview a{
     text-decoration: none;
     color: #ff2400;
 }
 
-.success div a:hover {
+.success div a:hover, .order-preview a:hover {
     text-decoration: underline solid #ff2400;
 }
 
+.order-preview {
+    text-align: center;
+    margin: 0 0 0 130px;
+    padding: 10px 15px 10px 15px;
+    backdrop-filter: blur(15px);
+    border: 3px solid silver;
+    border-radius: 15px;
+    font-size: 1.11em;
+}
+
+.order-preview li {
+    list-style-type: none;
+    margin: 10px 20px 10px 0;
+}
