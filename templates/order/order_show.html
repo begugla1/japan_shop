@@ -16,7 +16,8 @@
                     <h4>Заказ номер {{ order.id }}: товаров - {{ order.get_total_quantity }}
                          >>> {{ order.get_total_sum }} руб.</h4>
                     <h4>Статус: <b> Не оплачено</b>
-                    <a href="{% url 'order_payment' order.id %}" class="btn btn-outline-secondary">Оплатить</a></h4>
+                    <a href="{% url 'order_clear' order.id %}" class="btn btn-outline-danger">Отменить заказ</a>
+                    <a href="{% url 'order_payment' order.id %}" class="btn btn-outline-success">Оплатить</a></h4>
                 </div>
             {% else %}
                 <div class="order-paid" style="background: url('{% static 'main/img/order-bg.jpg' %}');
@@ -25,7 +26,7 @@
                          >>> {{ order.get_total_sum }} руб.</h4>
                     <h4 style="color: #808080;">Статус: <b style="color: #808080;"> Оплачено</b></h4>
                     <h4 style="color: #808080;"><b style="color: #808080;">Заказ завершен</b>
-                    <a href="{% url 'order_delete' order.id %}" class="btn btn-outline-danger">Удалить данные о заказе</a></h4>
+                    <a href="{% url 'order_clear' order.id %}" class="btn btn-outline-danger">Удалить данные о заказе</a></h4>
                 </div>
             {% endif %}
         {% endfor %}

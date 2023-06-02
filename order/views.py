@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, ListView, CreateView
 from .forms import OrderForm
 from cart.cart import Cart
 from .models import OrderItem, Order
+from .tasks import order_created
 
 
 class OrderCreate(LoginRequiredMixin, CreateView):
@@ -27,6 +28,7 @@ class OrderCreate(LoginRequiredMixin, CreateView):
                 price=item['price'],
                 total_cost=item['total_product_sum'])
         cart.clear(self.request)
+        order_created(order.id)
         return redirect('order_success')
 
 

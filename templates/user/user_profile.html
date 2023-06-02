@@ -17,7 +17,7 @@
         <div class="info"><b>Email:</b> {% if user.email %}{{ user.email }}{% else %}Не указано{% endif %}</div>
         <div class="info"><b>Номер телефона:</b> {% if user.profile.phone_number %}{{ user.profile.phone_number }}
             {% else %}Не указано{% endif %}</div>
-        {% if user.order_set %}
+        {% if user.order_set.all|length > 0 %}
             <div class="info"><b><a href="{% url 'order_show' %}">Мои заказы</a></b></div>
         {% endif %}
         <div class="info">Изменить данные можно <a href="{% url 'edit_profile' %}">здесь</a></div>
