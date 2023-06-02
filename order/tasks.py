@@ -1,18 +1,18 @@
-from celery import shared_task
-from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
+import smtplib
+from email.mime.text import MIMEText
 
-from .models import Order
+from order.models import Order
 
 
-@shared_task
 def order_created(order_id):
     """
     Задача для отправки уведомления по email
     :param order_id:
     :return:
     """
-    order = get_object_or_404(Order, id=order_id)
+    sender = "yokimokiadm@gmail.com"
+    password = "aeahwjteaezmgjch"
+    order = Order.objects.get(id=order_id)
     subject = f'<<< Вы оформили заказ в магазине Ёки Моки >>>'
     message = f'''Дорогой {order.first_name} {order.last_name},\n\n
                 Ваш заказ был оформлен успешно!\n
@@ -22,10 +22,16 @@ def order_created(order_id):
                 Будем ждать вас еще!\n
                 С уважением, администрация Ёки Моки.
                 '''
-    mail_sent = send_mail(subject=subject,
-                          message=message,
-                          from_email=None,
-                          recipient_list=[order.email],
-                          )
-    return mail_sent
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+
+    try:
+        server.login(sender, password)
+        msg = MIMEText(message)
+        msg['Subject'] = subject
+        server.sendmail(sender, order.email, msg.as_string())
+
+    except Exception as _ex:
+        return f'{_ex}\nПроверьте введённые данные'
 
