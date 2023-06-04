@@ -1,3 +1,4 @@
+import copy
 
 from main.models import Product
 from app import settings
@@ -42,13 +43,14 @@ class Cart(object):
         self.save(request)
 
     def __iter__(self):
-        products_ids = self.cart.keys()
+        cart_copy = copy.deepcopy(self.cart)
+        products_ids = cart_copy.keys()
         db_products = Product.objects.filter(id__in=products_ids)
 
         for db_product in db_products:
-            self.cart[str(db_product.id)]['product_model'] = db_product
+            cart_copy[str(db_product.id)]['product_model'] = db_product
 
-        for product in self.cart.values():
+        for product in cart_copy.values():
             product['total_product_sum'] = product['price'] * product['quantity']
             yield product
 
@@ -59,5 +61,5 @@ class Cart(object):
         return sum((product['quantity'] * product['price'] for product in self.cart.values()))
 
     def get_ids(self):
-        return list(key for key in self.cart.keys())
+        return (key for key in self.cart.keys())
 

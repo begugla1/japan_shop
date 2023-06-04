@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load home_tags %}
+
+{% block title %}Избранное{% endblock %}
+
+{% block content %}
+    <div class="favorites">
+        {% if favorites.get_total_quantity > 0 %}
+            <h2><a href="{% url 'clear_favs' %}" class="btn btn-outline-danger">Удалить все из избранных</a></h2>
+            {% for item in favorites %}
+                <div class="fav-item">
+                    <img src="{% if item.image %}{{ item.image.url }}{% else %}
+                    {% static 'main/img/no-image.jpg' %}{% endif %}">
+                    <a href="{% url 'show_product' item.cat.slug item.slug %}">{{ item }}</a>
+                    {{ item.price }} руб. {{ item.cat }}
+                    {% if item.id|to_str in cart.get_ids %} <a href="{% url 'cart_detail' %}">
+                    <i class="fa-solid fa-cart-flatbed"></i></a>
+                    {% else %} <a href="{% url 'cart_add' item.id %}">
+                    <i class="fa-solid fa-cart-plus"></i></a> {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>У вас нет ни одного товара в избранном :(</h2>
+        {% endif %}
+    </div>
+{% endblock %}

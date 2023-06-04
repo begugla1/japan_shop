@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'main',
     'user',
     'order',
+    'favorites',
     'debug_toolbar',
     'crispy_bootstrap5',
     "django.contrib.admin",
@@ -73,6 +74,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "cart.context_processors.cart",
+                "favorites.context_processors.favorites"
             ],
         },
     },
@@ -146,6 +148,7 @@ INTERNAL_IPS = [
 ]
 
 CART_SESSION_ID = 'cart'
+FAVORITES_SESSION_ID = 'favorites'
 
 SITE_ID = 1
 

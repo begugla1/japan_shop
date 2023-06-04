@@ -442,3 +442,46 @@ footer .footer .author {
 .order-paid {
     color: black;
 }
+
+.favorites {
+    text-align: center;
+    padding: 11px 0 66px 0;
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorites h2 {
+    padding-bottom: 20px;
+}
+
+.fav-item {
+    width: 40vw;
+    height: 77px;
+    border: 3px solid silver;
+    margin: 10px 0 20px 0;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    font-size: 1.3em;
+    padding-top: 11px;
+    font-weight: 500;
+}
+
+.fav-item a{
+    color: red;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.fav-item a:hover {
+    text-decoration: underline solid #ff2400;
+}
+
+.fav-item img {
+    height: 50px;
+    border: 1px solid #ff2400;
+    border-radius: 7px;
+    margin: 0 5px 0 0;
+}

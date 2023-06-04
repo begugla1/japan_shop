@@ -10,9 +10,13 @@ background-size: cover;">
     <div class="info">{{ product.description|linebreaks|cut:55 }}</div>
     <div class="info"><b>Цена: </b> {{ product.price }} руб.</div>
     <div class="info">
-        <a href="" class="btn btn-danger " style="margin: 0 10px 0 10px">В избранное</a>
+        {% if product.id|to_str in favorites.get_ids %}
+            <a href="{% url 'delete_fav' product.id %}" style="margin: 0 40px 0 40px"><i class="fa-solid fa-heart fa-xl"></i></a>
+        {% else %}
+            <a href="{% url 'add_fav' product.id %}" style="margin: 0 40px 0 40px"><i class="fa-regular fa-heart fa-xl"></i></a>
+        {% endif %}
         {% if product.id|to_str in cart.get_ids %}
-            <a href="{% url 'cart_detail' %}" class="btn btn-secondary">Перейти в корзину</a>
+            <a href="{% url 'cart_delete' product.id %}" class="btn btn-secondary">Удалить из корзины</a>
         {% else %}
             <a href="{% url 'cart_add' product.id %}" class="btn btn-dark" >Добавить в корзину</a>
         {% endif %}

@@ -14,13 +14,14 @@ def show_aside(cat_name, cats):
 
 
 @register.inclusion_tag('main/content.html')
-def show_content(cat_name, products, page_obj, paginator, cart):
+def show_content(cat_name, products, page_obj, paginator, cart, favorites):
     context = {
         'cat_name': cat_name,
         'products': products,
         'page_obj': page_obj,
         'paginator': paginator,
         'cart': cart,
+        'favorites': favorites,
     }
     return context
 
@@ -35,10 +36,11 @@ def show_pag(page_obj, paginator):
 
 
 @register.inclusion_tag('main/card.html')
-def show_card(product, cart):
+def show_card(product, cart, favorites):
     context = {
         'product': product,
         'cart': cart,
+        'favorites': favorites
     }
     return context
 

@@ -30,7 +30,10 @@
             Корзина: {% if cart.get_total_sum > 0 %} {{ cart.get_total_sum }} руб. <i class="fa-solid fa-face-grin-wide"></i></a>
             {% else %} <i class="fa-solid fa-face-frown"></i>{% endif %}</div>
 
-            <div class="links"><a href=""><i class="fa-regular fa-heart"></i> Избранное</a></div>
+
+            <div class="links"><a href="{% url 'show_favs' %}"><i class="fa-regular fa-heart"></i> Избранное:
+                {% if favorites.get_total_quantity > 0 %} {{ favorites.get_total_quantity }} шт.
+                {% else %} <i class="fa-solid fa-face-frown-open"></i> {% endif %}</a></div>
 
             {% if request.user.is_authenticated %}
                     <div class="links"><a href="{% if request.user.is_superuser %}/admin{% else %}{% url 'profile' %}{% endif %}">
