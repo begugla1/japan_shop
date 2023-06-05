@@ -1,0 +1,6 @@
+{% load home_tags %}
+{% if product.id|to_str in cart.get_ids %}
+    <a href="{% url 'cart_delete' product.id %}" class="btn btn-secondary">Удалить из корзины</a>
+{% else %}
+    <a href="{% url 'cart_add' product.id %}" class="btn btn-dark" >Добавить в корзину</a>
+{% endif %}

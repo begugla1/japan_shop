@@ -1,0 +1,6 @@
+{% load home_tags %}
+{% if product.id|to_str in favorites.get_ids %}
+    <a href="{% url 'delete_fav' product.id %}" style="margin: 0 35px 0 35px"><i class="fa-solid fa-heart fa-xl"></i></a>
+{% else %}
+    <a href="{% url 'add_fav' product.id %}" style="margin: 0 35px 0 35px"><i class="fa-regular fa-heart fa-xl"></i></a>
+{% endif %}

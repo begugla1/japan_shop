@@ -45,6 +45,24 @@ def show_card(product, cart, favorites):
     return context
 
 
+@register.inclusion_tag('main/fav_item.html')
+def show_fav_item(product, favorites):
+    context = {
+        'product': product,
+        'favorites': favorites
+    }
+    return context
+
+
+@register.inclusion_tag('main/cart_item.html')
+def show_cart_item(product, cart):
+    context = {
+        'product': product,
+        'cart': cart
+    }
+    return context
+
+
 @register.filter
 def cut(value: str, quantity: int):
     value = value.replace('<p>', '').replace('</p>', '')
