@@ -18,11 +18,15 @@
             <div class="detail-text"><h2><b>{{ product.name }}</b></h2></div>
             <div class="detail-text">{{ product.description|linebreaks }}</div>
             <div class="detail-text">
-                <a href="" class="btn btn-danger">В избранное</a>
-                {% if product.id|to_str in cart.get_ids %}
-                    <a href="{% url 'cart_detail' %}" class="btn btn-secondary">Перейти в корзину</a>
+                {% if product.id|to_str in favorites.get_ids %}
+                    <a href="{% url 'delete_fav' product.id %}" style="margin: 30px 30px 0 30px;"><i class="fa-solid fa-heart fa-xl"></i></a>
                 {% else %}
-                    <a href="{% url 'cart_add' product.id %}" class="btn btn-dark" >Добавить в корзину</a>
+                    <a href="{% url 'add_fav' product.id %}" style="margin: 30px 30px 0 30px;"><i class="fa-regular fa-heart fa-xl"></i></a>
+                {% endif %}
+                {% if product.id|to_str in cart.get_ids %}
+                    <a href="{% url 'cart_detail' %}" class="btn btn-secondary" style="margin-bottom: 13px;">Перейти в корзину</a>
+                {% else %}
+                    <a href="{% url 'cart_add' product.id %}" class="btn btn-dark" style="margin-bottom: 13px;">Добавить в корзину</a>
                 {% endif %}
             </div>
         </div>
