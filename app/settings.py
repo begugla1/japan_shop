@@ -161,3 +161,12 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 2419200
 SESSION_COOKIE_SECURE = True
+
+# Email
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "yokimokiadm@gmail.com"
+EMAIL_HOST_PASSWORD = "aeahwjteaezmgjch"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+

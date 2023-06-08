@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, CreateView
 from .forms import OrderForm
 from cart.cart import Cart
 from .models import OrderItem, Order
-from .tasks import order_created
+from .email import order_created
 
 
 class OrderCreate(LoginRequiredMixin, CreateView):

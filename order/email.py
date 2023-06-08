@@ -1,17 +1,15 @@
-import smtplib
-from email.mime.text import MIMEText
+from django.core.mail import send_mail
 
 from order.models import Order
+from app import settings
 
 
 def order_created(order_id):
     """
-    Задача для отправки уведомления по email
+    Отправка уведомления по email
     :param order_id:
     :return:
     """
-    sender = "yokimokiadm@gmail.com"
-    password = "aeahwjteaezmgjch"
     order = Order.objects.get(id=order_id)
     subject = f'<<< Вы оформили заказ в магазине Ёки Моки >>>'
     message = f'''Дорогой {order.first_name} {order.last_name},\n\n
@@ -23,15 +21,5 @@ def order_created(order_id):
                 С уважением, администрация Ёки Моки.
                 '''
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-
-    try:
-        server.login(sender, password)
-        msg = MIMEText(message)
-        msg['Subject'] = subject
-        server.sendmail(sender, order.email, msg.as_string())
-
-    except Exception as _ex:
-        return f'{_ex}\nПроверьте введённые данные'
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [order.email])
 
