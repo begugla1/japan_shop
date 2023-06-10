@@ -12,7 +12,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('available', 'create_time', 'update_time', 'cat')
     search_fields = ('name', 'cat')
     list_editable = ('available',)
-    readonly_fields = ('image',)
 
 
 class CategoryAdmin(admin.ModelAdmin):

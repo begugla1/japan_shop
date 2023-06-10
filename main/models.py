@@ -7,7 +7,7 @@ from transliterate import translit
 class Product(models.Model):
     name = models.CharField('Название', max_length=150, db_index=True)
     slug = models.SlugField('URL', unique=True, db_index=True)
-    image = models.ImageField('Изображение', upload_to='media/products/%Y/%m/%d', blank=True)
+    image = models.ImageField('Изображение', upload_to='products/%Y/%m/%d', blank=True)
     description = models.TextField('Описание', blank=True)
     price = models.PositiveIntegerField('Цена')
     available = models.BooleanField('В наличии', default=True)
