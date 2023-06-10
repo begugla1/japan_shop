@@ -8,4 +8,7 @@ If you want to run this project, you need to follow next steps:
 EMAIL_HOST_USER=yourValidGmailAddress    
 EMAIL_HOST_PASSWORD=gmailAppPassword*      
 
-*See more information about App Password here https://support.google.com/accounts/answer/185833?hl=ru
+*See more information about App Password here https://support.google.com/accounts/answer/185833?hl=ru <br>
+
+Admin login: admin    
+Admin password: admin
