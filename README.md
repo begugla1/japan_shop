@@ -1,5 +1,5 @@
 # japan_shop
-Django first project
+Django first project<br>    
 Little internet-shop with authenctication, cart and favorites.
 
 If you want to run this project, you need to follow next steps:
