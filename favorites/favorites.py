@@ -3,7 +3,7 @@ from main.models import Product
 
 
 class Favorites(object):
-    """Class for cart"""
+    """Class for favorites"""
     def __init__(self, request):
         favorites = request.session.get(settings.FAVORITES_SESSION_ID)
         if not favorites:
