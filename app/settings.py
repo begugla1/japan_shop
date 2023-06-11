@@ -135,7 +135,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.accounts.get_username',
     'social_core.pipeline.accounts.create_user',
-    'user.authentication.create_profile',
+    'accounts.authentication.create_profile',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.accounts.user_details',

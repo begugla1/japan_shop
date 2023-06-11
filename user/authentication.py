@@ -1,4 +1,4 @@
-from accounts.models import Profile
+from user.models import Profile
 
 
 def create_profile(backend, user, *args, **kwargs):
