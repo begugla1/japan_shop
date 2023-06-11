@@ -19,12 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('social-auth/', include('social_django.urls',
+                                 namespace='social')),
     path("admin", admin.site.urls),
-    path('user/', include('user.urls')),
+    path('accounts/', include('accounts.urls')),
     path('order/', include('order.urls')),
     path('cart/', include('cart.urls')),
     path('favorites/', include('favorites.urls')),
-    path('', include('main.urls'))
+    path('', include('main.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

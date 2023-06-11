@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +28,7 @@ SECRET_KEY = "django-insecure-@=_v-$%_imh=js58fdylgyjyt*xlok%5#&gze4^82$$o^*m$jt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -35,11 +36,13 @@ ALLOWED_HOSTS = ['127.0.0.1']
 INSTALLED_APPS = [
     'cart',
     'main',
-    'user',
+    'accounts',
     'order',
     'favorites',
     'debug_toolbar',
     'crispy_bootstrap5',
+    'django_extensions',
+    'social_django',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -113,6 +116,30 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Authentication
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '771025936388-bq7940fv36b9dsudvrf722f7b4rm2799.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.accounts.get_username',
+    'social_core.pipeline.accounts.create_user',
+    'accounts.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.accounts.user_details',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -129,7 +156,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -145,7 +172,9 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    'mysite.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 CART_SESSION_ID = 'cart'
@@ -161,7 +190,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 2419200
-SESSION_COOKIE_SECURE = True
 
 # Email
 
