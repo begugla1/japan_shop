@@ -122,7 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '771025936388-bq7940fv36b9dsudvrf722f7b4rm2799.apps.googleusercontent.com'
