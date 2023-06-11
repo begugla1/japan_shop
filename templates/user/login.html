@@ -12,6 +12,10 @@
             {{ form|crispy }}
             <button type="submit" class="btn btn-outline-danger" style="margin: 10px 0 0 0px;">Войти</button>
         </form>
+        <a href="{% url 'social:begin' 'google-oauth2' %}"
+           class="btn btn-outline-info"
+           style="margin: 25px 0 0 0;"
+        > Войти через Google</a>
     </div>
 </div>
 {% endblock %}

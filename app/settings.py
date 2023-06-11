@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'favorites',
     'debug_toolbar',
     'crispy_bootstrap5',
-    'django_extensions',
     'social_django',
+    'django_extensions',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.sites',
+    'social.apps.django_app.default',
     'crispy_forms',
 ]
 
@@ -121,6 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '771025936388-bq7940fv36b9dsudvrf722f7b4rm2799.apps.googleusercontent.com'
@@ -133,13 +135,14 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.accounts.get_username',
-    'social_core.pipeline.accounts.create_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
     'user.authentication.create_profile',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.accounts.user_details',
+    'social_core.pipeline.user.user_details',
 ]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
