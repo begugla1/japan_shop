@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'cart',
     'main',
-    'accounts',
+    'user',
     'order',
     'favorites',
     'debug_toolbar',
@@ -135,7 +135,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.accounts.get_username',
     'social_core.pipeline.accounts.create_user',
-    'accounts.authentication.create_profile',
+    'user.authentication.create_profile',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.accounts.user_details',
