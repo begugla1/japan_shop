@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import ListView, CreateView
 
 from .forms import OrderForm
 from cart.cart import Cart
 from .models import OrderItem, Order
-from .email import order_created
 
 
 class OrderCreate(LoginRequiredMixin, CreateView):
@@ -28,17 +27,9 @@ class OrderCreate(LoginRequiredMixin, CreateView):
                 price=item['price'],
                 total_cost=item['total_product_sum'])
         cart.clear(self.request)
-        order_created(order.id)
-        return redirect('order_success')
-
-
-class OrderSuccess(TemplateView):
-    template_name = 'order/order_success.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['order'] = Order.objects.first()
-        return context
+        self.request.session['order_id'] = order.id
+        self.request.session.modified = True
+        return redirect('payment:process')
 
 
 class OrderShow(ListView):
@@ -51,15 +42,13 @@ class OrderShow(ListView):
         return Order.objects.filter(user=self.request.user)
 
 
-def order_pay(request, order_id):
-    order = Order.objects.get(id=order_id)
-    order.paid = True
-    order.save()
-    context = {'order': order}
-    return render(request, 'order/order_success_payment.html', context)
-
-
 def order_delete(request, order_id):
     order = Order.objects.get(id=order_id)
     order.delete()
+    return redirect('order_show')
+
+
+def order_delete_all(request):
+    orders = Order.objects.filter(user=request.user)
+    orders.delete()
     return redirect('order_show')

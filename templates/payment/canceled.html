@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Заказ отменен{% endblock %}
+
+{% block content %}
+    <div class="success">
+        <div class="words">
+            <div>
+                <p><b>Упс, что-то пошло не так :0</b></p>
+                <p>Транзакция отклонена</p>
+                <p>В связи с вызванной ошибкой, ваш заказ был удален</p>
+                <p><a href="/"><b>На главную</b></a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
