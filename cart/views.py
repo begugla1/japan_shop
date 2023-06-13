@@ -16,14 +16,13 @@ def cart_add(request, product_id):
     cart = Cart(request)
 
     if request.method == 'POST':
-        form_quantity = CartAddProductForm(request.POST)
-        if form_quantity.is_valid():
-            form_data = form_quantity.cleaned_data
-            cart.add(request,
-                     product_id,
-                     form_data['quantity'],
-                     form_data['update']
-                     )
+        product_quantity = int(request.POST.get('product_quantity'))
+        cart.add(
+            request,
+            product_id,
+            product_quantity,
+            True
+        )
     else:
         cart.add(request, product_id)
 

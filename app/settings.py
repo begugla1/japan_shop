@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -206,6 +205,8 @@ EMAIL_USE_TLS = True
 
 # Stripe settings
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51NI8eILIx0yEufSQrq7ek8wlSgIrDoo9UIuaMM7WEfvtUGtTdi13FM8fMeq889jqKLSR6QLRxFkGII7CjT0t7FBn00gW7YtZUR'
-STRIPE_SECRET_KEY = 'sk_test_51NI8eILIx0yEufSQmCtibSqAraCa8eLsnm104bm5SkWfuy1VB8GprvwJ8nk6sWFMzQ2Z3kcoWvAU0RX5PZnt4vbv00W0T3ZOj0'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51NI8eILIx0yEufSQrq7ek8wlSgIrDoo9UIuaMM7WEfvtUGtTdi13FM8fMeq889jqKLSR6QLRxFkGII7C' \
+                         'jT0t7FBn00gW7YtZUR'
+STRIPE_SECRET_KEY = 'sk_test_51NI8eILIx0yEufSQmCtibSqAraCa8eLsnm104bm5SkWfuy1VB8GprvwJ8nk6sWFMzQ2Z3kcoWvAU0RX5PZnt4' \
+                    'vbv00W0T3ZOj0'
 STRIPE_API_VERSION = '2022-08-01'

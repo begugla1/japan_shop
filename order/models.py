@@ -32,6 +32,13 @@ class Order(models.Model):
     def get_total_quantity(self):
         return sum(item.quantity for item in self.orderitem_set.all())
 
+    def get_away_bought_products(self):
+        order_items = self.orderitem_set.all()
+        order_db_products = (order_item.product for order_item in order_items)
+        for db_product in order_db_products:
+            db_product.stock -= order_items.get(product=db_product).quantity
+            db_product.save()
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, db_index=True, verbose_name='Заказ')

@@ -4,14 +4,14 @@ from order.models import Order
 from app import settings
 
 
-def order_created(order_id):
+def send_email_acceptation(order_id):
     """
     Отправка уведомления по email
     :param order_id:
     :return:
     """
     order = Order.objects.get(id=order_id)
-    subject = f'<<< Вы оформили заказ в магазине Ёки Моки >>>'
+    subject = '<<< Вы оформили заказ в магазине Ёки Моки >>>'
     message = f'''Дорогой {order.first_name} {order.last_name},\n\n
                 Ваш заказ был оформлен успешно!\n
                 Дата оформления заказа: {order.time_create}\n

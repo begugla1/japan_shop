@@ -26,6 +26,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('show_product', kwargs={'cat_slug': self.cat.slug, 'product_slug': self.slug})
 
+    def get_stock_range(self):
+        return (i for i in range(1, int(self.stock) + 1))
+
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'

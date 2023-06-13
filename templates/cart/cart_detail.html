@@ -36,7 +36,19 @@
                                 <td>{{ product.quantity }} шт.
                                     <form action="{% url 'cart_add' db_product.id %}" method="post">
                                         {% csrf_token %}
-                                        {{ form.as_div }}
+                                        <div>
+                                            <select name="product_quantity" id="" style="background: transparent;
+                                            border-radius: 9px;">
+                                                <option selected="selected">{{ product.quantity }}</option>
+                                                {% for i in db_product.get_stock_range %}
+                                                    {% if i == product.quantity %}
+                                                        <option disabled>&check;</option>
+                                                    {% else %}
+                                                        <option>{{ i }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                         <button type="submit" class="btn btn-link btn-sm">Обновить</button>
                                     </form>
                                 </td>

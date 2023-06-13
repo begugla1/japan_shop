@@ -22,7 +22,7 @@ class Cart(object):
         if not product:
             self.cart[str(product_id)] = {
                                           'quantity': product_quantity,
-                                          'price': db_product.price,
+                                          'price': db_product.price
                                           }
 
         if product_update:
@@ -45,7 +45,7 @@ class Cart(object):
     def __iter__(self):
         cart_copy = copy.deepcopy(self.cart)
         products_ids = cart_copy.keys()
-        db_products = Product.objects.filter(id__in=products_ids)
+        db_products = Product.objects.filter(id__in=products_ids).select_related('cat')
 
         for db_product in db_products:
             cart_copy[str(db_product.id)]['product_model'] = db_product
