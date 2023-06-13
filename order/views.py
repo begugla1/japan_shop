@@ -8,6 +8,7 @@ from cart.cart import Cart
 from .models import OrderItem, Order
 
 
+# TODO пофиксить баг при выходе из формы оплаты через кнопку в браузере
 class OrderCreate(LoginRequiredMixin, CreateView):
     form_class = OrderForm
     template_name = 'order/order_create.html'
@@ -26,7 +27,6 @@ class OrderCreate(LoginRequiredMixin, CreateView):
                 quantity=item['quantity'],
                 price=item['price'],
                 total_cost=item['total_product_sum'])
-        cart.clear(self.request)
         self.request.session['order_id'] = order.id
         self.request.session.modified = True
         return redirect('payment:process')

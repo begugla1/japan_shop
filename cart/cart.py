@@ -11,7 +11,7 @@ class Cart(object):
             cart = request.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def save(self, request):
+    def __save(self, request):
         request.session[settings.CART_SESSION_ID] = self.cart
         request.session.modified = True
 
@@ -30,17 +30,17 @@ class Cart(object):
         else:
             self.cart[str(product_id)]['quantity'] += 1
 
-        self.save(request)
+        self.__save(request)
 
     def remove(self, request, product_id):
         product = self.cart.get(str(product_id))
         if product:
             del self.cart[str(product_id)]
-            self.save(request)
+            self.__save(request)
 
     def clear(self, request):
         self.cart.clear()
-        self.save(request)
+        self.__save(request)
 
     def __iter__(self):
         cart_copy = copy.deepcopy(self.cart)

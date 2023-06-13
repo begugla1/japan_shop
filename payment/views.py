@@ -4,6 +4,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
+from cart.cart import Cart
 from payment.tasks import order_created
 from order.models import Order
 
@@ -51,6 +52,8 @@ class PaymentComplete(TemplateView):
         order = get_object_or_404(Order, id=order_id)
         order.paid = True
         order.save()
+        cart = Cart(self.request)
+        cart.clear(self.request)
         order.get_away_bought_products()
         order_created(order.id)
         return render(self.request, 'payment/completed.html')
@@ -60,6 +63,8 @@ class PaymentCancel(TemplateView):
     template_name = 'payment/canceled.html'
 
     def get(self, request, *args, **kwargs):
+        cart = Cart(self.request)
+        cart.clear(self.request)
         order_id = request.session['order_id']
         order = get_object_or_404(Order, id=order_id)
         order.delete()
