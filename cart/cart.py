@@ -15,7 +15,11 @@ class Cart(object):
         request.session[settings.CART_SESSION_ID] = self.cart
         request.session.modified = True
 
-    def add(self, request, product_id, product_quantity=0, product_update=False):
+    def add(self,
+            request,
+            product_id,
+            product_quantity=0,
+            product_update=False):
         product = self.cart.get(str(product_id))
         db_product = Product.objects.get(id=product_id)
 
@@ -45,21 +49,23 @@ class Cart(object):
     def __iter__(self):
         cart_copy = copy.deepcopy(self.cart)
         products_ids = cart_copy.keys()
-        db_products = Product.objects.filter(id__in=products_ids).select_related('cat')
+        db_products = Product.objects.filter(
+            id__in=products_ids) .select_related('cat')
 
         for db_product in db_products:
             cart_copy[str(db_product.id)]['product_model'] = db_product
 
         for product in cart_copy.values():
-            product['total_product_sum'] = product['price'] * product['quantity']
+            product['total_product_sum'] = (product['price']
+                                            * product['quantity'])
             yield product
 
     def get_total_quantity(self):
         return sum((product['quantity'] for product in self.cart.values()))
 
     def get_total_sum(self):
-        return sum((product['quantity'] * product['price'] for product in self.cart.values()))
+        return sum(((product['quantity']
+                     * product['price']) for product in self.cart.values()))
 
     def get_ids(self):
         return (key for key in self.cart.keys())
-

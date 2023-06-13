@@ -16,11 +16,11 @@ def send_email_acceptation(order_id):
                 Ваш заказ был оформлен успешно!\n
                 Дата оформления заказа: {order.time_create}\n
                 Номер заказа: {order.id}\n
-                Адрес: Город - {order.city}; почтовый код - {order.postal_code}; адрес - {order.address}\n
+                Адрес: {order.city}; почтовый код - {order.postal_code};
+                адрес - {order.address}\n
                 Ожидайте заказ в ближайшее время\n
                 Будем ждать вас еще!\n
                 С уважением, администрация Ёки Моки.
                 '''
 
     send_mail(subject, message, settings.EMAIL_HOST_USER, [order.email])
-
