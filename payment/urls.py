@@ -5,7 +5,7 @@ from .views import *
 app_name = 'payment'
 
 urlpatterns = [
-    path('process/', payment_process, name='process'),
+    path('process/', PaymentProcess.as_view(), name='process'),
     path('completed/', PaymentComplete.as_view(), name='completed'),
     path('canceled/', PaymentCancel.as_view(), name='canceled'),
 ]

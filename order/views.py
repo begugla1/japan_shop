@@ -27,6 +27,7 @@ class OrderCreate(LoginRequiredMixin, CreateView):
                 quantity=item['quantity'],
                 price=item['price'],
                 total_cost=item['total_product_sum'])
+            
         self.request.session['order_id'] = order.id
         self.request.session.modified = True
         return redirect('payment:process')

@@ -7,8 +7,6 @@ from app import settings
 def send_email_acceptation(order_id):
     """
     Отправка уведомления по email
-    :param order_id:
-    :return:
     """
     order = Order.objects.get(id=order_id)
     subject = '<<< Вы оформили заказ в магазине Ёки Моки >>>'
