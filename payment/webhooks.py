@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404
 import stripe
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -10,14 +10,15 @@ from order.models import Order
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META('HTTP_STRIPE_SIGNATURE')
-    event = None
 
     try:
         event = stripe.Webhook.construct_event(
             payload, 
             sig_header,
             settings.STRIPE_WEBHOOK_SECRET)
-    except ValueError or stripe.error.SignatureVerificationError:
+    except ValueError:
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError:
         return HttpResponse(status=400)
     
     if event.type == 'checkout.session.completed':
