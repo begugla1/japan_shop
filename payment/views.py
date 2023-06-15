@@ -52,12 +52,10 @@ class PaymentProcess(TemplateView):
 class PaymentComplete(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        order_id = request.session['order_id']
-        order = get_object_or_404(Order, id=order_id)
         cart = Cart(self.request)
         cart.clear(self.request)
-        order.get_away_bought_products()
-        order_created.delay(order.id)
+        order_id = request.session['order_id']
+        order_created.delay(order_id)
         return render(self.request, 'payment/completed.html')
 
 
