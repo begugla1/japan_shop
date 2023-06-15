@@ -16,13 +16,15 @@ def order_stripe_payment(obj):
         html = f'<a href="{url}" target="_blank">{obj.stripe_id}</a>'
         return mark_safe(html)
     return ''
+
+
 order_stripe_payment.short_description = 'Stripe payment'
 
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'email',
                     'phone_number', 'city', 'postal_code', 'address',
-                    order_stripe_payment, 'time_create', 'time_update', 
+                    order_stripe_payment, 'time_create', 'time_update',
                     'paid')
     list_display_links = ('user',)
     list_filter = ('user', 'paid', 'time_create')

@@ -44,7 +44,7 @@ class OrderShow(ListView):
 
 
 def order_delete(request, order_id):
-    order = Order.objects.get(id=order_id)
+    order = Order.objects.get(user=request.user, id=order_id)
     order.delete()
     return redirect('order_show')
 
