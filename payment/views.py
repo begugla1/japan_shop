@@ -54,8 +54,6 @@ class PaymentComplete(TemplateView):
     def get(self, request, *args, **kwargs):
         order_id = request.session['order_id']
         order = get_object_or_404(Order, id=order_id)
-        order.paid = True
-        order.save()
         cart = Cart(self.request)
         cart.clear(self.request)
         order.get_away_bought_products()

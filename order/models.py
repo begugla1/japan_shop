@@ -7,6 +7,7 @@ from main.models import Product
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_index=True,
                              verbose_name='Пользователь')
+    stripe_id = models.CharField('Stripe ID', max_length=255, blank=True)
     first_name = models.CharField('Имя', max_length=255)
     last_name = models.CharField('Фамилия', max_length=255)
     email = models.EmailField('Email')
@@ -38,6 +39,12 @@ class Order(models.Model):
         for db_product in order_db_products:
             db_product.stock -= order_items.get(product=db_product).quantity
             db_product.save()
+
+    def get_order_stripe_url(self):
+        if not self.stripe_id:
+            return ''
+        path = '/test/' if '_test_' in settings.STRIPE_SECRET_KEY else '/'
+        return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
 
 
 class OrderItem(models.Model):
