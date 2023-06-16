@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 
 from .cart import Cart
-from .forms import CartAddProductForm
 
 
-def cart_detail(request):
-    form = CartAddProductForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'cart/cart_detail.html', context)
+class CartDetail(TemplateView):
+    template_name = 'cart/cart_detail.html'
 
 
 def cart_add(request, product_id):
