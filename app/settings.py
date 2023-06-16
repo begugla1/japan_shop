@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
 
+
+load_dotenv(find_dotenv())
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-@=_v-$%_imh=js58fdylgyjyt*xlok%5#&gze4^82$$o^*m$jt"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -124,8 +127,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '771025936388-bq7940fv36b9dsudvrf722f7b4rm2799.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
@@ -195,8 +198,6 @@ SESSION_COOKIE_AGE = 2419200
 
 # Email
 
-load_dotenv(find_dotenv())
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
@@ -205,10 +206,8 @@ EMAIL_USE_TLS = True
 
 # Stripe settings
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51NI8eILIx0yEufSQrq7ek8wlSgIrDoo9UIuaMM7WEfvtUGtTdi13FM8fMeq889jqKLSR6QLRxFkGII7C' \
-                         'jT0t7FBn00gW7YtZUR'
-STRIPE_SECRET_KEY = 'sk_test_51NI8eILIx0yEufSQmCtibSqAraCa8eLsnm104bm5SkWfuy1VB8GprvwJ8nk6sWFMzQ2Z3kcoWvAU0RX5PZnt4' \
-                    'vbv00W0T3ZOj0'
-STRIPE_API_VERSION = '2022-08-01'
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_API_VERSION = os.getenv('STRIPE_API_VERSION')
 
-STRIPE_WEBHOOK_SECRET = 'whsec_f914388675a8775b8c604de183cab70c1ceca0acea85144140cb89564865bca6'
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
