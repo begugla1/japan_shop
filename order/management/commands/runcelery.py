@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 import subprocess
+import random
 
 
 class Command(BaseCommand):
@@ -27,7 +28,8 @@ class Command(BaseCommand):
         command_tail = '--pool=solo' if not options['nw'] else ''
         subprocess.Popen([
             'powershell',
-            f'celery -A {options["main_app"]} worker -l info {command_tail}'
+            f'celery -A {options["main_app"]} worker --loglevel=INFO '
+            f'--concurrency=10 -n worker-{random.randint(1, 1000000)}.%h {command_tail}'
             ])
 
 
