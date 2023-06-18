@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from transliterate import translit
+from .validators import price_validate
 
 
 class Product(models.Model):
@@ -9,7 +10,7 @@ class Product(models.Model):
     slug = models.SlugField('URL', unique=True, db_index=True)
     image = models.ImageField('Изображение', upload_to='products/%Y/%m/%d', blank=True)
     description = models.TextField('Описание', blank=True)
-    price = models.PositiveIntegerField('Цена')
+    price = models.PositiveIntegerField('Цена', validators=[price_validate])
     available = models.BooleanField('В наличии', default=True)
     stock = models.PositiveIntegerField('Кол-во')
     create_time = models.DateTimeField('Время создания', auto_now_add=True)
