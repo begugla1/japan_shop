@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
 from order.models import Order
-from user.tests import valid_number
+from user.validators import valid_number
 
 
 class OrderForm(ModelForm):
