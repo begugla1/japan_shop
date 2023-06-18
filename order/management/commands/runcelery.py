@@ -23,7 +23,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not options['nm']:
-            self.stdout.write(self.style.SUCCESS('Celery start running...'))
+            self.stdout.write(self.style.SUCCESS('\nCelery start running '
+                                                 f'with settings of {options["main_app"]}\n'))
 
         command_tail = '--pool=solo' if not options['nw'] else ''
         subprocess.Popen([

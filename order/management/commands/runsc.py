@@ -17,10 +17,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not options['nm']:
-            self.stdout.write(self.style.SUCCESS('Stripe cli start running...'))
+            self.stdout.write(self.style.SUCCESS('\nStripe cli start listening to '
+                                                 f'{options["stripe_webhook_url"]}...\n'))
 
-        if not isinstance(options['stripe_webhook_url'], str):
-            raise CommandError('Uncorrected url!')
         subprocess.Popen([
             'powershell',
             f'stripe listen --forward-to {options["stripe_webhook_url"]}'

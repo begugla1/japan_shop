@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'cat')
     list_filter = ('available', 'create_time', 'update_time', 'cat')
     search_fields = ('name', 'cat')
-    list_editable = ('available',)
+    list_editable = ('available', 'stock')
     readonly_fields = ('create_time', 'update_time')
     fields = ('name', 'slug', 'image', 'description', 'price',
               'available', 'stock', 'cat')

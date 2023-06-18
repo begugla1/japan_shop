@@ -13,6 +13,7 @@
             {{ product.image.url }}{% else %}{% static 'main/img/no-image.jpg' %}{% endif %}"></div></div>
             <div class="detail-text"><b>Артикул: </b> {{ product.id }}</div>
             <div class="detail-text"><b>Цена: </b> {{ product.price }} руб.</div>
+            <div class="detail-text"><b>В наличии</b> {{ product.stock }} шт.</div>
         </div>
         <div class="section-right">
             <div class="detail-text"><h2><b>{{ product.name }}</b></h2></div>
