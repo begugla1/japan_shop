@@ -57,7 +57,6 @@ def edit_profile(request):
 
         return redirect('edit_profile')
         
-        # return redirect('edit_profile')
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
