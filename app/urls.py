@@ -21,7 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('social-auth/', include('social_django.urls',
                                  namespace='social')),
-    path("admin", admin.site.urls),
+    path("admin/", admin.site.urls),
     path('accounts/', include('user.urls')),
     path('order/', include('order.urls')),
     path('payment/', include('payment.urls', namespace='payment')),

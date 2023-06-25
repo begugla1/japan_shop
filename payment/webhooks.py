@@ -1,9 +1,11 @@
 import stripe
-from django.shortcuts import get_object_or_404
-from app import settings
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+
+from app import settings
 from order.models import Order
+from payment.tasks import order_created
 
 
 @csrf_exempt
@@ -27,5 +29,6 @@ def stripe_webhook(request):
             order.stripe_id = session.payment_intent
             order.save()
             order.get_away_bought_products()
+            order_created.delay(order.id)
     
     return HttpResponse(status=200)

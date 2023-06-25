@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
 import stripe
 from django.conf import settings
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
 from cart.cart import Cart
-from payment.tasks import order_created
 from order.models import Order
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -52,8 +51,6 @@ class PaymentComplete(TemplateView):
     def get(self, request, *args, **kwargs):
         cart = Cart(self.request)
         cart.clear(self.request)
-        order_id = request.session['order_id']
-        order_created.delay(order_id)
         return render(self.request, 'payment/completed.html')
 
 
