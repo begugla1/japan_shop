@@ -36,16 +36,6 @@ ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'cart',
-    'main',
-    'user',
-    'order',
-    'favorites',
-    'payment',
-    'debug_toolbar',
-    'crispy_bootstrap5',
-    'social_django',
-    'django_extensions',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -53,8 +43,20 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.sites',
+
     'social.apps.django_app.default',
     'crispy_forms',
+    'debug_toolbar',
+    'crispy_bootstrap5',
+    'social_django',
+    'django_extensions',
+
+    'cart',
+    'main',
+    'user',
+    'order',
+    'favorites',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -125,12 +127,17 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
+SOCIAL_AUTH_GITHUB_KEY = '8151da840344a8d82414'
+SOCIAL_AUTH_GITHUB_SECRET = '2294692ff6b2de904a2929ea15ec1ef6e9f14742'
+
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
