@@ -1,5 +1,6 @@
-from django.core.management.base import BaseCommand, CommandError
 import subprocess
+
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -10,8 +11,7 @@ class Command(BaseCommand):
         parser.add_argument('stripe_webhook_url',
                             nargs='?',
                             default='127.0.0.1:8000/payment/webhook/',
-                            type=str
-                            )
+                            type=str)
         parser.add_argument('--nm',
                             action='store_true')
 
@@ -22,6 +22,5 @@ class Command(BaseCommand):
 
         subprocess.Popen([
             'powershell',
-            f'stripe listen --forward-to {options["stripe_webhook_url"]}'
-        ])
+            f'stripe listen --forward-to {options["stripe_webhook_url"]}'])
 

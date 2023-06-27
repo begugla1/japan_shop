@@ -12,15 +12,13 @@ class Command(BaseCommand):
         parser.add_argument('main_app',
                             nargs='?',
                             default='app',
-                            type=str
-                            )
+                            type=str)
 
         parser.add_argument('--nm',
                             action='store_true')
 
         parser.add_argument('--nw',
-                            action='store_true',
-                            )
+                            action='store_true')
 
     def handle(self, *args, **options):
         if not options['nm']:
