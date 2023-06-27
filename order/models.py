@@ -38,6 +38,9 @@ class Order(models.Model):
         order_db_products = (order_item.product for order_item in order_items)
         for db_product in order_db_products:
             db_product.stock -= order_items.get(product=db_product).quantity
+            if db_product.stock <= 0:
+                db_product.stock = 0
+                db_product.available = False
             db_product.save()
 
     def get_order_stripe_url(self):
