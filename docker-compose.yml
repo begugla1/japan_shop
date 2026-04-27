@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: japan_shop_db
+    environment:
+      POSTGRES_DB: japanshop
+      POSTGRES_USER: japanshop_user
+      POSTGRES_PASSWORD: ""
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 5432 -U japanshop_user -d japanshop"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    network_mode: "host"
+
+  web:
+    image: python:3.11-slim
+    container_name: japan_shop_web
+    working_dir: /app
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-docker-dev-secret-key}
+      EMAIL_HOST_USER: ${EMAIL_HOST_USER:-}
+      EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD:-}
+      SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: ${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY:-}
+      SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: ${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET:-}
+      SOCIAL_AUTH_GITHUB_KEY: ${SOCIAL_AUTH_GITHUB_KEY:-}
+      SOCIAL_AUTH_GITHUB_SECRET: ${SOCIAL_AUTH_GITHUB_SECRET:-}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_API_VERSION: ${STRIPE_API_VERSION:-2023-10-16}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      POSTGRES_USER: japanshop_user
+      RUN_HTTPS: ${RUN_HTTPS:-1}
+      CREATE_SUPERUSER: ${CREATE_SUPERUSER:-0}
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME:-admin}
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-admin@example.com}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-admin}
+    depends_on:
+      db:
+        condition: service_healthy
+    # Host networking avoids bridge/veth creation on restricted kernels.
+    network_mode: "host"
+    volumes:
+      - ./:/app
+    command: >
+      bash -lc "
+      apt-get update &&
+      apt-get install -y --no-install-recommends postgresql-client ca-certificates gcc libpq-dev git build-essential &&
+      rm -rf /var/lib/apt/lists/* &&
+      pip install --no-cache-dir --upgrade pip setuptools wheel &&
+      pip install --no-cache-dir -r requirements.txt &&
+      chmod +x /app/docker/entrypoint.sh &&
+      /app/docker/entrypoint.sh
+      "
+
+volumes:
+  pgdata:
